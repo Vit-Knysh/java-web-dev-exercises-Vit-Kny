@@ -9,11 +9,11 @@ public class Area {
 
         input = new java.util.Scanner(System.in);
         System.out.println("Enter a radius: ");
-        do {
-            radius = input.nextDouble();
-        } while (radius <= 0 );
-
-        input.close();
+        radius = input.nextDouble();
+             if (radius <=0) {
+                System.err.println("You have to enter positive number");
+                return;
+            }
 
         area = Circle.getArea(radius);
         System.out.println("The area of a circle of radius " + radius + " is: " + area);
