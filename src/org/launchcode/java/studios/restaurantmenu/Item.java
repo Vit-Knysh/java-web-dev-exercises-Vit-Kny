@@ -2,7 +2,7 @@ package org.launchcode.java.studios.restaurantmenu;
 
 import java.util.Date;
 
-public class MenuItem {
+public class Item {
     private String name;
     private double price;
     private String[] category = new String[] {"Appetizer", "Main Course", "Dessert"};
@@ -17,7 +17,7 @@ public class MenuItem {
         this.description = description;
     }
 
-    public MenuItem(String name, double price, String[] category, String description, Date date) {
+    public Item(String name, double price, String[] category, String description, Date date) {
         this.name = name;
         this.price = price;
         this.category = category;
@@ -25,7 +25,7 @@ public class MenuItem {
         this.date = date;
     }
 
-    public MenuItem (MenuItem item) {
+    public Item(Item item) {
         this.name = name;
         this.price = price;
         this.category = category;
