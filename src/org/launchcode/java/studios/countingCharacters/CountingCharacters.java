@@ -10,16 +10,18 @@ public class CountingCharacters {
         //method loops through each character (convert string to array)
         // create some collection to hold the following: character: score
 
-        char [] characters = input.toCharArray();
+        char [] characters = input.toLowerCase().toCharArray();
         HashMap<Character, Integer> scores = new HashMap<>();
 
         for (char letter: characters ) {
-            if (!scores.containsKey(letter)) {
-                scores.put(letter, 1);
-            } else {
-                 scores.put(letter, (scores.get(letter) + 1));
+            if (Character.isLetter(letter)) {
+                if (!scores.containsKey(letter)) {
+                    scores.put(letter, 1);
+                } else {
+                    scores.put(letter, (scores.get(letter) + 1));
                 }
             }
+        }
 
         for (Map.Entry<Character, Integer> score: scores.entrySet() ) {
             System.out.println(String.format("%s: %s", score.getKey(), score.getValue()));
