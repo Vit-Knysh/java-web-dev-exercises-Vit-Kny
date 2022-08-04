@@ -1,60 +1,67 @@
 package org.launchcode.java.studios.restaurantmenu;
 
 import java.util.ArrayList;
+import java.util.Scanner;
+import java.util.Date;
 
 public class Menu {
-    private ArrayList<Item> menuItems;
-    private ArrayList<Item> results; //search results from searchMenu method
+    private ArrayList<MenuItem> items;
 
-    public Menu () {
-        menuItems = new ArrayList<Item>();
-        results = new ArrayList<Item>();
+    private Date lastUpdated;
+
+    public Menu(ArrayList<MenuItem> items) {
+        this.items = items;
+        this.lastUpdated = new Date();
     }
 
-    public Menu(ArrayList<Item> existingMenu) {
-        for (Item item : existingMenu) {
-            menuItems.add(item);
+    public void add (MenuItem item) {
+        this.items.add(item);
+    }
+
+    public void simpleRemove (int index) {
+        this.items.remove(index);
+    }
+
+    public Date getLastUpdated() {
+        return lastUpdated;
+    }
+
+    public void setLastUpdated(Date lastUpdated) {
+        this.lastUpdated = lastUpdated;
+    }
+
+    public void showLastUpdated() {
+        System.out.println(String.format("The menu was last updated on: %s", this.getLastUpdated()));
+    }
+
+    public void remove () {
+        Scanner input = new Scanner(System.in);
+        System.out.println("Select a number corresponding to the menu item you would like to remove: ");
+        this.showAll();
+        int indexToDelete = (input.nextInt() - 1);
+        input.close();
+
+        this.items.remove(indexToDelete);
+    }
+
+    public void simpleShowItem(int index) {
+        MenuItem theItem = this.items.get(index);
+        System.out.println(theItem.getName() + ": " + theItem.getPrice());
+    }
+
+    public void showItem() {
+        Scanner input = new Scanner(System.in);
+        System.out.println(String.format("Select a number from %s to %s corresponding to the menu item you would like to show: ", 1, this.items.size()));
+        int indexToShow = (input.nextInt() - 1);
+        input.close();
+        this.simpleShowItem(indexToShow);
+    }
+
+    public void showAll() {
+        for (int i = 0; i < this.items.size(); i++) {
+            MenuItem theItem = this.items.get(i);
+            System.out.println(String.format("%s) %s: %s", i + 1,theItem.getName(), theItem.getPrice()));
         }
-        results = new ArrayList<Item>();
     }
-
-    public void addItem (Item item) {
-        menuItems.add(item);
-    }
-
-    public void removeItem (String name) {
-        for (Item item : menuItems) {
-            if (name.equals(item.getName())) {
-                System.out.println(item.getName() + " has been removed from the Menu.");
-                menuItems.remove(item);
-                break;
-            }
-        }
-        System.out.println("No item found");
-    }
-
-    public Item getItem(String name) {
-        for (Item item : menuItems) {
-            if (name.equals(item.getName())) {
-                return item;
-            }
-        }
-        return null;
-    }
-
-    public ArrayList<Item> searchMenu (String str) {
-        results.clear();
-        for (Item item : menuItems) {
-            if (item.getInfo().contains(str)) {
-                results.add(item);
-            }
-        }
-        return results;
-    }
-
-    public ArrayList<Item> getMenu() {
-        return menuItems;
-    }
-
 
 }
